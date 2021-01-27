@@ -21,16 +21,7 @@ class BaseReferenceController extends Controller
     }
 
     public function index() {
-
-        $items = [];
-
-        $response = $this->repo->all();
-        $items = $response;
-
-//        foreach ($response as $key => $item) {
-//            $items[] = $item;
-//        }
-
+        $items = $this->repo->all();
         print_r($items);
     }
 
@@ -51,6 +42,11 @@ class BaseReferenceController extends Controller
     }
 
     public function updateItem(Request $request) {
+        // $users = DB::select('select * from basicrefbook');
+        print_r($request->all());
+    }
+
+    public function deleteItem($id) {
         // $users = DB::select('select * from basicrefbook');
         print_r($request->all());
     }
