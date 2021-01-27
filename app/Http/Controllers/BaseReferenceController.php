@@ -28,7 +28,7 @@ class BaseReferenceController extends Controller
     public function getByItemId($itemId) {
         // $users = DB::select('select * from basicrefbook');
         $item = $this->repo->getByItemId($itemId);
-        print_r($item);
+        return $item;
     }
 
     public function getListByRecourceType($resourceType, $active = 0) {
@@ -37,18 +37,18 @@ class BaseReferenceController extends Controller
     }
 
     public function addItem(Request $request) {
-        // $users = DB::select('select * from basicrefbook');
-        print_r($request->all());
+        $data = $request->all();
+        $resp = $this->repo->addItem($data);
+        return $resp;
     }
 
     public function updateItem(Request $request) {
-        // $users = DB::select('select * from basicrefbook');
-        print_r($request->all());
+        $data = $request->all();
+        $resp = $this->repo->updateItem($data);
     }
 
     public function deleteItem($id) {
-        // $users = DB::select('select * from basicrefbook');
-        print_r($request->all());
+        print_r($id);
     }
 
 //    public function detail($id)

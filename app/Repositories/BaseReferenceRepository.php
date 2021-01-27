@@ -6,6 +6,13 @@ use App\Models\BaseReference;
 
 class BaseReferenceRepository implements BaseReferenceRepositoryInterface
 {
+    protected $model;
+    protected $primaryKey;
+
+    public function __construct() {
+        $this->model = new BaseReference;
+        $this->primaryKey = $this->model->getPrimaryKey();
+    }
 
     public function all()
     {
@@ -14,8 +21,8 @@ class BaseReferenceRepository implements BaseReferenceRepositoryInterface
 
     public function getByItemId($itemId)
     {
-        $item = BaseReference::where('id', $itemId)->first()->toArray();
-        print_r($item);
+        // $item = BaseReference::where('id', $itemId)->first()->toArray();
+        $item = BaseReference::find($itemId);
         return $item;
     }
 
@@ -26,15 +33,32 @@ class BaseReferenceRepository implements BaseReferenceRepositoryInterface
         else
             $items = BaseReference::where('resourcetype', $resourceType)->get()->toArray();
 
-        print_r($items);
-
         return $items;
     }
 
-    public function getModel()
+    public function addItem($data)
     {
+        $model = new BaseReference();
+        foreach ($data as $key => $value)
+            $model->$key = $value;
 
+        return $model->save();
     }
 
+    public function updateItem($data)
+    {
+        $itemId = $this->getItemValue($data, $this->primaryKey, 0);
+        $model  = BaseReference::find($itemId);
+        foreach ($data as $key => $value)
+            $model->$key = $value;
+        return $model->save();
+    }
+
+    private function getItemValue($data, $fname, $defValue = '') {
+        $value = $defValue;
+        if(isset($data[$fname]))
+            $value = $data[$fname];
+        return $value;
+    }
 
 }

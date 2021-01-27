@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class BaseReference extends Model
 {
     use HasFactory;
-    public $table = 'basicrefbook';
+    protected $table = 'basicrefbook';
+    protected $primaryKey = 'id';
 
+    public function getPrimaryKey() {
+        return $this->primaryKey;
+    }
 }

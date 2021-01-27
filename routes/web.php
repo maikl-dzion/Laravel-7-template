@@ -24,8 +24,8 @@ Route::get('/base/{itemId}', [App\Http\Controllers\BaseReferenceController::clas
 Route::get('/base/list/{resourcetype}/{active}', [App\Http\Controllers\BaseReferenceController::class, 'getListByRecourceType']);
 
 
-Route::post('/base/add'  , [App\Http\Controllers\BaseReferenceController::class, 'addItem']);
-Route::put('/base/update', [App\Http\Controllers\BaseReferenceController::class, 'updateItem']);
+Route::post('/base/save/add'  , [App\Http\Controllers\BaseReferenceController::class, 'addItem']);
+Route::post('/base/save/update', [App\Http\Controllers\BaseReferenceController::class, 'updateItem']);
 Route::delete('/base/delete/{id}', [App\Http\Controllers\BaseReferenceController::class, 'deleteItem']);
 
 Route::get('/make/migrate/init', [App\Http\Controllers\MakeMigrateWorkerController::class, 'run']);
